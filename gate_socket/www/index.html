@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <style>
+        #a {
+            width: 400px;
+            height: 400px;
+            margin: auto;
+            background-color: red;
+            margin-top: 100px;
+        }
+
+        #status-text {
+            font-size: 3em;
+            text-align: center;
+            padding-top: 20%;
+            color: floralwhite;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="a">
+        <div id="status-text">
+            <p id="status">
+                CLOSED
+            </p>
+            <p id="plate">
+            </p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="socket.io.js"></script>
+    <script>
+        const hostname = window.location.protocol + "//" + window.location.host + "/";
+        var socket = io.connect(hostname, { "transports": ["websocket"] });
+        socket.on('connect', function (data) { });
+        socket.on('gate', function (data) {
+            if (data.open == true) {
+                $("#a").css('background-color', 'green');
+                $("#status").text("OPEN")
+                $("#plate").text(data.plate)
+            } else {
+                $("#a").css('background-color', 'red');
+                $("#status").text("CLOSED")
+                $("#plate").text("")
+            }
+        });
+    </script>
+</body>
+
+</html>
