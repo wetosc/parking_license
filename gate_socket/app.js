@@ -15,10 +15,10 @@ app.use(express.static('www'))
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-var gateClient
+// var clients
 
 io.on('connection', (client) => {
-    gateClient = client
+    // gateClient = client
 });
 
 
@@ -29,11 +29,11 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     res.status(200).end()
-    if (gateClient != null) {
-        gateClient.emit("gate", { open: true, plate: req.body.plate })
-    }
+    
+    io.sockets.emit("gate", { open: true, plate: req.body.plate })
+    
     setTimeout(() => {
-        gateClient.emit("gate", { open: false })
+        io.sockets.emit("gate", { open: false })
     }, 30 * 1000);
 })
 
