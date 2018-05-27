@@ -1,0 +1,9 @@
+version: "3"
+services:
+  ocv:
+    image: ocv:latest
+    privileged: true
+    devices: 
+      - /dev/media0:/dev/media0
+  govision:
+    image: govision:latest

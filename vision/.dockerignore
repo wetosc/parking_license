@@ -1,0 +1,6 @@
+.git
+Dockerfile
+Pipfile
+Pipfile.lock
+.vscode
+run.sh

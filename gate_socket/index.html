@@ -1,0 +1,35 @@
+<!doctype html>  
+<html lang="en">  
+    <head>
+        <style>
+            #a {
+                width: 400px;
+                height: 400px;
+                margin: auto;
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="a">
+
+        </div>
+         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="socket.io.js"></script>            
+        <script>
+            var socket = io.connect('http://localhost:9000', {"transports" : ["websocket"]});
+            socket.on('connect', function(data) {});
+            socket.on('gate', function(data) {
+                if (data == true) {
+                    $("#a").css('background-color', 'green');
+                    setTimeout(function() {
+                        $("#a").css('background-color', 'red');
+                    }, 1500)
+                } else {
+                    $("#a").css('background-color', 'red');
+                }
+                console.log(data)
+            });
+        </script>
+    </body>
+</html>  
