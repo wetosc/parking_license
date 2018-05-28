@@ -59,7 +59,7 @@ func onImage(c *tcpClient.Client, data []byte) {
 }
 
 func sendResult(plateNr string) {
-	// u, err := url.Parse("http://172.31.235.8:8080/entry/decrement")
+	// u, err := url.Parse("http://172.31.166.224:8080/entry/decrement")
 	u, err := url.Parse("http://104.196.102.76/entry/decrement")
 	checkError(err, "Bad base URL")
 
@@ -102,9 +102,9 @@ func addConfidence(plate string, confidence float32) {
 
 		floatVal += confidence
 		// fmt.Printf("CONFIDENCE: %v", floatVal)
-		if floatVal > 5 {
+		if floatVal > 3 {
 
-			c.Set("detected", true, 1*time.Minute)
+			c.Set("detected", true, 30*time.Second)
 
 			sendResult(plate)
 
